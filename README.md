@@ -15,7 +15,7 @@ This repo hosts the solution for the teller bank challenge.
 {:ok, token} = Teller.Customer.get_token()
 Teller.Customer.enroll("teller", "yellow_smokey", "gabon", token)
 Teller.Customer.choose_mfa_method("SMS", token)
-Teller.Customer.verify_mfa_with_code(123_456, token)
+Teller.Customer.verify_mfa_with_code(123456, token) // returns account_id
 Teller.Customer.get_account("acc_u2fed4l2ozezh6rxbmn52bogaey2xiac6pfzt3q", token)
 ```
 
