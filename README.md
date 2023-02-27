@@ -1,21 +1,42 @@
 # Teller
 
-**TODO: Add description**
+This repo hosts the solution for the teller bank challenge.
 
+ 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `teller` to your list of dependencies in `mix.exs`:
+- Run `mix deps.get` to install required dependencies.
+- open interactive terminal by `iex -S mix`
 
-```elixir
-def deps do
-  [
-    {:teller, "~> 0.1.0"}
-  ]
-end
+
+## Test
+- on the command line, type in the driver code to have a walkthrough of the APIs created for Teller customers
+```
+{:ok, token} = Teller.Customer.get_token()
+Teller.Customer.enroll("teller", "yellow_smokey", "gabon", token)
+Teller.Customer.choose_mfa_method("SMS", token)
+Teller.Customer.verify_mfa_with_code(123_456, token)
+Teller.Customer.get_account("acc_u2fed4l2ozezh6rxbmn52bogaey2xiac6pfzt3q", token)
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/teller>.
+By the end, you should see a list of user transactions as well as decrypted 12 digits account number of that user
+
+## Documentation
+
+The codebase consists of three modules: 
+- Internal
+- APIServer
+- Customer
+
+The internal module contains the client code used to communicate with the bank API directly.
+APIServer module is a simple GenServer used to store and retrieve currently enrolled users.
+Customer module uses the APIServer and return the query result to mini teller customers.
+
+The above solves the challenge as required. More documentation can be found inside comments.
+
+## Future Improvements
+There are many things that could be improved in this codebase with more experience using Elixir, such as the use of GenServers, unit test, Elixir-way of functional programming, etc
+I can also refactor some functions if I know more about the bank APIs we are using.
+
+
 
